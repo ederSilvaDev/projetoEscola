@@ -6,19 +6,28 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import classesAuxiliares.funcaoAutenticacao;
+import cursojava.Interfaces.permitirAcesso;
 import cursojava.classes.Aluno;
+import cursojava.classes.Diretor;
 import cursojava.classes.Disciplinas;
+import cursojava.classes.Secretario;
 import cursojava.constantes.statusAluno;
 
 public class cursoJava {
 
+	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
 
 		String login = JOptionPane.showInputDialog("Informe e Login");
 		String password = JOptionPane.showInputDialog("Informe e Senha");
 
-		if (login.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
-
+		//funcaoAutenticacao autenticacao = new funcaoAutenticacao();
+		
+		/*1- interface do tipo secretario(login e senha), */ 
+		
+		/*nova de função de autenicação passando o objeto permitiracesso*/
+		if (new funcaoAutenticacao(new Diretor (login, password)).autenticar()) {/*TRAVA O ACESSSO AO SISTEMA SOMENTE QUEM TEM REALMENTE COMO O CONTRATO*/
 			/*
 			 * CRIA-SE UM LISTA DE ALUNOS E LOGO EM SEGUINDA UM FOR DE 1 A 2 QUE SERA
 			 * INFORMADO 2 ALUNOS E SUAS DISCIPLINAS E NOTAS
@@ -41,42 +50,7 @@ public class cursoJava {
 
 				/* Entrada de DADOS */
 				String nome = JOptionPane.showInputDialog("Nome do Aluno " + qtd + "?");
-				/*
-				 * String idade = JOptionPane.showInputDialog("Idade do Aluno ?"); String
-				 * dtnascimento = JOptionPane.showInputDialog("Data de Nascimento do Aluno ?");
-				 * String nMae = JOptionPane.showInputDialog("Nome da Mae do Aluno ?"); String
-				 * nPai = JOptionPane.showInputDialog("Nome do Pai do Aluno ?"); String nEscola
-				 * = JOptionPane.showInputDialog("Nome da Escola do Aluno ?"); String cpf =
-				 * JOptionPane.showInputDialog("CPF do Aluno ?"); String rg =
-				 * JOptionPane.showInputDialog("RG do Aluno ?"); String dMatricula =
-				 * JOptionPane.showInputDialog("Data da Matricula do Aluno ?"); String matricula
-				 * = JOptionPane.showInputDialog("Matricula do Aluno ?");
-				 */
-
-				/*
-				 * fazendo referecia ao objeto pra asssim ter acesso aos atributos gerados os
-				 * set e getr´s dos atributos da classe Aluno é possivel trabalhar com os
-				 * atributos de quaquqler outra classe nesse caso os setNome, setIdade e etc..
-				 * são atributos da classe aluno e nesse mesmo linha é atribudo o valor qualquer
-				 * ("Eder")
-				 */
-
 				aluno1.setNome(nome);
-				/*
-				 * aluno1.setIdade(Integer.valueOf(idade));
-				 * aluno1.setDataNascimento(dtnascimento); aluno1.setNomeMae(nMae);
-				 * aluno1.setNomePai(nPai); aluno1.setNomeEscola(nEscola);
-				 * aluno1.setNrocpf(cpf); aluno1.setNrorg(rg);
-				 * aluno1.setDataMatricula(dMatricula); aluno1.setSerieMatriculada(matricula);
-				 */
-
-				/*
-				 * NA CLASSE ALUNOS ESTA FAZENDO REFERENCIA A UMA OUTRA CLASSSE DISCIPLINAS QUE
-				 * POSSUI SEUS PROPRIOS ATRIBUSTOS, que SERAM RECEBIDOS ATRAVES DE UMA LISTA DE
-				 * DISCIPLINAS CRIADA DE FORMA "DINAMICA"
-				 */
-
-				// ESSE FOR PERCORRE POR 4 POSIÇÕES, ONDE A CADA LAÇO E
 				for (int pos = 1; pos <= 1; pos++) {
 
 					String nomeDisciplina = JOptionPane.showInputDialog("Nome de Disciplina " + pos + " ?");
@@ -89,10 +63,6 @@ public class cursoJava {
 					aluno1.getDisciplinas().add(disciplina);
 				}
 
-				/*
-				 * ROTINA QUE POSSIBILITA AO USUARIO DECIDIR SE DESEJA REMOVER ALGUMA DISCIPLINA
-				 * ACRESCIDA
-				 */
 				int escolha = JOptionPane.showConfirmDialog(null, " Deseja remover a Disciplina");
 
 				if (escolha == 0) {
@@ -127,7 +97,7 @@ public class cursoJava {
 					maps.get(statusAluno.RECUPERACAO).add(aluno);
 				} else if (aluno.getAprovado2().equalsIgnoreCase(statusAluno.REPROVADO)) {
 					maps.get(statusAluno.REPROVADO).add(aluno);
-				} 
+				}
 
 			}
 			System.out.println("<--------Lista dos Aprovados--------->");
@@ -147,10 +117,10 @@ public class cursoJava {
 			for (Aluno aluno : maps.get(statusAluno.REPROVADO)) {
 				System.out.println("Resultado = " + aluno.getNome() + " > " + aluno.getAprovado2() + " com média de = "
 						+ aluno.getmediaNota());
-
 			}
 
+		} else {
+			JOptionPane.showMessageDialog(null, "Acesso não Permititdo");
 		}
 	}
-
 }

@@ -6,16 +6,9 @@ import java.util.List;
 import cursojava.constantes.statusAluno;
 
 /*ESTA É NOSSA CLASSE/OBEJETO QUE REPRESENTA O ALUNO*/
-public class Aluno {
-
+public class Aluno extends Pessoa {
+	
 	/* Atributos */
-	private String nome;
-	private int idade;
-	private String dataNascimento;
-	private String nrorg;
-	private String nrocpf;
-	private String nomeMae;
-	private String nomePai;
 	private String dataMatricula;
 	private String nomeEscola;
 	private String serieMatriculada;
@@ -34,62 +27,6 @@ public class Aluno {
 
 	public void setDisciplinas(List<Disciplinas> disciplinas) {
 		this.disciplinas = disciplinas;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getNrorg() {
-		return nrorg;
-	}
-
-	public void setNrorg(String nrorg) {
-		this.nrorg = nrorg;
-	}
-
-	public String getNrocpf() {
-		return nrocpf;
-	}
-
-	public void setNrocpf(String nrocpf) {
-		this.nrocpf = nrocpf;
-	}
-
-	public String getNomeMae() {
-		return nomeMae;
-	}
-
-	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
-	public String getNomePai() {
-		return nomePai;
-	}
-
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
 	}
 
 	public String getDataMatricula() {
@@ -153,20 +90,20 @@ public class Aluno {
 		}
 	}
 
-	/* TOSTRING */
 	@Override
 	public String toString() {
-		return "Aluno [nome=" + nome + ", idade=" + idade + ", dataNascimento=" + dataNascimento + ", nrorg=" + nrorg
-				+ ", nrocpf=" + nrocpf + ", nomeMae=" + nomeMae + ", nomePai=" + nomePai + ", dataMatricula="
-				+ dataMatricula + ", nomeEscola=" + nomeEscola + ", serieMatriculada=" + serieMatriculada + "]";
+		return "Aluno [dataMatricula=" + dataMatricula + ", nomeEscola=" + nomeEscola + ", serieMatriculada="
+				+ serieMatriculada + ", disciplinas=" + disciplinas + "]";
 	}
 
-	/* HASHCODE E EQUALS */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((dataMatricula == null) ? 0 : dataMatricula.hashCode());
+		result = prime * result + ((disciplinas == null) ? 0 : disciplinas.hashCode());
+		result = prime * result + ((nomeEscola == null) ? 0 : nomeEscola.hashCode());
+		result = prime * result + ((serieMatriculada == null) ? 0 : serieMatriculada.hashCode());
 		return result;
 	}
 
@@ -179,11 +116,43 @@ public class Aluno {
 		if (getClass() != obj.getClass())
 			return false;
 		Aluno other = (Aluno) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (dataMatricula == null) {
+			if (other.dataMatricula != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!dataMatricula.equals(other.dataMatricula))
+			return false;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
+			return false;
+		if (nomeEscola == null) {
+			if (other.nomeEscola != null)
+				return false;
+		} else if (!nomeEscola.equals(other.nomeEscola))
+			return false;
+		if (serieMatriculada == null) {
+			if (other.serieMatriculada != null)
+				return false;
+		} else if (!serieMatriculada.equals(other.serieMatriculada))
 			return false;
 		return true;
+	}
+	
+	/*O OVERRIDE SIGNIFICA QUE AS LINHAS ABAIXO SÃO METODOS OU QUALQUER COISA QUE ESTA SENDO INSTANCIADA DE 
+	 * UM  OUTRO LUGAR NO CASO O METODO PESSOMAIORIDADE VEM DA CLASSE PESSOA*/
+	@Override
+	public boolean pessoaMaiorIdade() {
+		
+		return super.pessoaMaiorIdade();
+	}
+	
+	public String msgMaiorIdade() {
+		return this.pessoaMaiorIdade() ? "MAIOR IDADE !" : "DI MENOR !!!";
+	}
+
+	@Override
+	public double salario() {
+		return 2500.00;
 	}
 }
